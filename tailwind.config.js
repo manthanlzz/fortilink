@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     "./src/sections/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -22,11 +21,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        manrope: ['"Manrope"', 'sans-serif'],
+        manrope: ['"Manrope"', "sans-serif"],
       },
     },
   },
   plugins: [],
 };
 
-export default config;
+module.exports = config;
