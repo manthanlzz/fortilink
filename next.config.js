@@ -2,6 +2,10 @@ const path = require("path");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    optimizeCss: false,  // <-- Disable CSS minification & optimization
+  },
+
   webpack(config, { dev }) {
     // Existing SVG handling
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -24,14 +28,7 @@ const nextConfig = {
 
     fileLoaderRule.exclude = /\.svg$/i;
 
-    // Disable CSS minimizer only in production builds
-    if (!dev && config.optimization.minimizer) {
-      config.optimization.minimizer = config.optimization.minimizer.filter(
-        (plugin) => plugin.constructor.name !== "CssMinimizerPlugin"
-      );
-    }
-
-    // Add this alias:
+    // Add alias for "@/src"
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       "@": path.resolve(__dirname, "src"),
