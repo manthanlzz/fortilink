@@ -1,3 +1,5 @@
+const path = require("path");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack(config, { dev }) {
@@ -28,6 +30,12 @@ const nextConfig = {
         (plugin) => plugin.constructor.name !== "CssMinimizerPlugin"
       );
     }
+
+    // Add this alias:
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      "@": path.resolve(__dirname, "src"),
+    };
 
     return config;
   },
