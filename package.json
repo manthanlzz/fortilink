@@ -2,12 +2,14 @@
   "name": "light-saas-landing-page",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+ "scripts": {
+  "vercel-build": "npm install --legacy-peer-deps && next build",
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+}
+,
   "dependencies": {
     "@splinetool/react-spline": "^3.0.0",
     "clsx": "^2.1.1",
