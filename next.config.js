@@ -3,10 +3,15 @@ const path = require("path");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    optimizeCss: false,  // <-- Disable CSS minification & optimization
+    optimizeCss: false,
   },
 
   webpack(config, { dev }) {
+    // Disable CSS minification completely
+    if (!dev) {
+      config.optimization.minimize = false;
+    }
+
     // Existing SVG handling
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.(".svg")
@@ -16,7 +21,7 @@ const nextConfig = {
       {
         ...fileLoaderRule,
         test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
+        resourceQuery: /url/,
       },
       {
         test: /\.svg$/i,
@@ -28,7 +33,7 @@ const nextConfig = {
 
     fileLoaderRule.exclude = /\.svg$/i;
 
-    // Add alias for "@/src"
+    // Alias for "@/src"
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
       "@": path.resolve(__dirname, "src"),
